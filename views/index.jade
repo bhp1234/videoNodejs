@@ -1,0 +1,93 @@
+extends header
+
+block content
+  <div class="header">
+  <div class="wrap">
+  <div class="logo">
+  <a href="index.html"><img src="#{ global.site_path }images/logo.png" title="logo" /></a>
+  </div>
+
+  <div class="top-menu">
+  <div class="top-nav">
+  <ul>
+  <li><a href="#">Blog</a></li>
+  <li><a href="#">Videos</a></li>
+  <li><a href="categories.html">Categories</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  </ul>
+  </div>
+  <div class="search" style="width:441px">
+  <form>
+  <div style="width:80%">
+  <div class="input-group">
+  
+  <input type="text" style="width:300px" class="form-control" placeholder="Search for...">
+  <span class="input-group-btn">
+  <button class="btn btn-default" type="button" style="background:url(#{global.site_path}images/search-icon.png) no-repeat 46% 46% #464141;width:48px;height:34px"></button>
+  </span>
+  </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+
+  </form>
+  </div>
+  <div class="clear"> </div>
+  </div>
+  <div class="clear"> </div>
+
+  </div>
+
+  </div>
+  <div class="clear"> </div>
+  .main-content
+    .wrap
+
+     .right-content
+      .right-content-heading
+       .right-content-heading-left
+         ul.categories
+          - for( var i in listCategory){
+             li(id="#{listCategory[i]['_id']}")
+               a(href="#")
+                span
+                 i(class="#{listCategory[i]['icon']}") 
+                |#{listCategory[i]['name'].toUpperCase()}
+              div(id="#{listCategory[i]['_id']}",class="category-detail")
+                ul
+         - for(var j in listFilmType[listCategory[i]['_id']]){ 
+             li #{listFilmType[listCategory[i]['_id']][j]['type_name']}
+         - }
+               
+          - }
+       .right-content-heading-right
+        .social-icons
+         ul
+              li <a class="facebook" href="#" target="_blank"> </a>
+              li <a class="twitter" href="#" target="_blank"></a>
+              li <a class="googleplus" href="#" target="_blank"></a>
+              li <a class="pinterest" href="#" target="_blank"></a>
+              li <a class="dribbble" href="#" target="_blank"></a>
+              li <a class="vimeo" href="#" target="_blank"></a>
+
+        .clear
+      .row
+       .content-grids
+        .content-grid(style="width:227px")
+         - for(var i in listFilm){
+            a(href="#{listFilm[i]['image']}") 
+             img(src="#{listFilm[i]['image']}",style="width:227px;height:227px")
+            h3(style="margin:0 0 0 0") #{ listFilm[i]['name'].toUpperCase()}
+            ul
+             li 
+              a(href="#")
+               img(src="images/likes.png",title="#{ listFilm[i]['name']} - #{global.dns}")
+             li 
+              a(href="#")
+               img(src="images/views.png",title="#{ listFilm[i]['name']} - #{global.dns}")
+             li 
+              a(href="#")
+               img(src="images/link.png",title="#{ listFilm[i]['name']} - #{global.dns}")
+            a(href="none",class="button") Xem ngay
+         -  }
+
+  .clear
+  
