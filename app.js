@@ -5,29 +5,40 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs=require('fs');
+var bodyParser = require('body-parser')
+
+var allConst=fs.readdirSync('./public/constant');
+	for(var i in allConst)
+	{
+		if(fs.statSync('./public/constant/'+allConst[i]).isFile())
+		{
+			require('./public/constant/'+allConst[i]);
+		}
+	}
 require('./public/constant/path');
 var index=require('./routes/index');
 var app = express();
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 var allRouter =fs.readdirSync('./routes');
-for(var i in allRouter)
-{
-	if(fs.statSync('./routes/'+allRouter[i]).isFile())
+	for(var i in allRouter)
 	{
-	var name=allRouter[i].substring(0,allRouter[i].lastIndexOf('.'));
-	var obj=require('./routes/'+name);
+		if(fs.statSync('./routes/'+allRouter[i]).isFile())
+		{
+			var name=allRouter[i].substring(0,allRouter[i].lastIndexOf('.'));
+			var obj=require('./routes/'+name);
 
-	try{
-	var objController=require('./controllers/'+name+'_Controller');
-
-	crl=new objController(name);
-
-	obj.setController(crl);
-
-	}catch(exception){};
-	app.use('/'+name, obj);
+			try{
+			var objController=require('./controllers/'+name+'_Controller');
+			var crl=new objController(name);
+			
+			obj.setController(crl);
+			}catch(exception){};
+			app.use('/'+name, obj);
+		}
 	}
-}
-// view engine setup
+
+	// view engine setup
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
 

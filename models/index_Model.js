@@ -54,7 +54,7 @@ method.MongoClient.connect(global.url, function (err, db) {
 });
 };
 
-method.getFilmType=function(id,callback){ 
+method.getFilmType=function(id,index,callback){ 
 method.MongoClient.connect(global.url, function (err, db) {
   if (err) {
     console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -65,7 +65,7 @@ method.MongoClient.connect(global.url, function (err, db) {
       if (err) {
         console.log(err);
       } else if (result.length) {
-		callback(result);
+		callback(result,index);
       } else {
         console.log('No document(s) found with defined "find" criteria!');
       }
@@ -81,8 +81,8 @@ method.getListFilmType=function(list,callback){
 	for(var i in list)
 	{
 	var j=0;
-	  this.getFilmType(list[i]['_id'],function(data){	  
-	  result[list[j]['_id']]=data;
+	  this.getFilmType(list[i]['_id'],i,function(data,index){	
+	  result[list[index]['_id']]=data;
 	  if(j==list.length-1)
 	  callback(result);
 	  j++;

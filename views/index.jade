@@ -21,7 +21,7 @@ block content
   <div style="width:80%">
   <div class="input-group">
   
-  <input type="text" style="width:300px" class="form-control" placeholder="Search for...">
+  <input type="text" style="width:300px" id="searchBox" class="form-control" placeholder="Search for...">
   <span class="input-group-btn">
   <button class="btn btn-default" type="button" style="background:url(#{global.site_path}images/search-icon.png) no-repeat 46% 46% #464141;width:48px;height:34px"></button>
   </span>
@@ -29,6 +29,8 @@ block content
   </div><!-- /.col-lg-6 -->
 
   </form>
+  <ul id="search_result">
+  </ul>
   </div>
   <div class="clear"> </div>
   </div>
@@ -38,24 +40,29 @@ block content
 
   </div>
   <div class="clear"> </div>
-  .main-content
+  .main-content(style="padding-bottom: 0px;")
     .wrap
 
      .right-content
       .right-content-heading
        .right-content-heading-left
          ul.categories
-          - for( var i in listCategory){
-             li(id="#{listCategory[i]['_id']}")
+          - for( var i in listCategory){ 
+             li(id="#{listCategory[i]['_id']}",style="float:left",onmouseover="showCategory('#{listCategory[i]['_id']}')",onmouseout="hideCategory('#{listCategory[i]['_id']}')")
                a(href="#")
                 span
-                 i(class="#{listCategory[i]['icon']}") 
+                 i(class="#{listCategory[i]['icon']}",style="margin-left:20%") 
                 |#{listCategory[i]['name'].toUpperCase()}
-              div(id="#{listCategory[i]['_id']}",class="category-detail")
-                ul
-         - for(var j in listFilmType[listCategory[i]['_id']]){ 
-             li #{listFilmType[listCategory[i]['_id']][j]['type_name']}
-         - }
+               div(id="cate#{listCategory[i]['_id']}",class="category-detail")
+                ul(style="margin-left:35px")
+                  -var j=0;
+                  -while(j<listFilmType[listCategory[i]['_id']].length){
+                     ul(style="float:left")
+                       
+                       - for(var k=0;k<global.numDisplayCate && j< listFilmType[listCategory[i]['_id']].length;k++,j++){ 
+                            li #{listFilmType[listCategory[i]['_id']][j]['type_name']}
+                       - }
+                  -}   
                
           - }
        .right-content-heading-right
@@ -90,4 +97,12 @@ block content
          -  }
 
   .clear
-  
+  block footer
+  .copy-right
+       p| Design by 
+                     a(href="") achiles
+  .footer
+    script(type='text/javascript', src='/libs/jquery/jquery-2.1.4.min.js')
+    script(type='text/javascript', src='/javascripts/script.js')
+    script(type='text/javascript', src='/libs/bootstrap/js/bootstrap.min.js')
+    script(type='text/javascript', src='/libs/font-awesome/js/font-awesome.min.js')
