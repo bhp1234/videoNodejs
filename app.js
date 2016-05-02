@@ -3,10 +3,9 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 var fs=require('fs');
 var bodyParser = require('body-parser')
-
+var session = require('express-session');
 var allConst=fs.readdirSync('./public/constant');
 	for(var i in allConst)
 	{
@@ -18,8 +17,12 @@ var allConst=fs.readdirSync('./public/constant');
 require('./public/constant/path');
 var index=require('./routes/index');
 var app = express();
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({secret: 'achiles'}));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 var allRouter =fs.readdirSync('./routes');
 	for(var i in allRouter)
 	{
@@ -30,8 +33,9 @@ var allRouter =fs.readdirSync('./routes');
 
 			try{
 			var objController=require('./controllers/'+name+'_Controller');
+
 			var crl=new objController(name);
-			
+
 			obj.setController(crl);
 			}catch(exception){};
 			app.use('/'+name, obj);

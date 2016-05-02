@@ -3,7 +3,7 @@ extends header
 block content
   
   .main-content(style="padding-bottom: 0px;")
-    .wrap
+
 
      .right-content
       .right-content-heading
@@ -40,26 +40,37 @@ block content
         .clear
       .row
        
-       .content-grids
-        
-         - for(var i in listFilm){
-           .content-grid(style="width:227px")
-            a(href="#{global.site_path}video/view?id=#{ listFilm[i]['_id']}") 
-             img(src="#{listFilm[i]['image']}",style="width:227px;height:227px")
-            h3(style="margin:0 0 0 0") #{ listFilm[i]['name'].toUpperCase()}
-            ul
-             li 
-              a(href="#")
-               img(src="images/likes.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-             li 
-              a(href="#")
-               img(src="images/views.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-             li 
-              a(href="#")
-               img(src="images/link.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-            a(href="none",class="button") Xem ngay
-         -  }
-
+            
+       div(style="width:90%;margin:5%")
+        .inner-page 
+         .title
+           h2 #{film['name']} ( #{film['english_name']} )
+         .video-inner 
+         -if(film['listEp'][0]!=null)
+          iframe(src="#{film['listEp'][0]['link']}",width="100%",height="500px",frameborder="0",webkitallowfullscree,mozallowfullscreen allowfullscreen)
+         -else
+          h2 VIDEO DANG CẬP NHẬT
+        .video-detail
+         .left-sidebar
+          .sidebar-boxs
+           .clear
+            .type-videos
+              h2 Giới Thiệu
+              ul
+               li Tên phim: #{film['name']}
+               li Tên tiếng Anh: #{film['english_name']}
+               li Năm sản xuất: #{film['year_of_production']}
+               li Thể loại film:
+               li Quốc gia: #{film['name']}
+               li Thời lượng: #{film['directory']}
+               li IMDb: #{film['imdb']}
+               li Nội dung: #{film['detail']}
+              ul
+               li Từ khóa: #{film['keyword']}
+              h2 Diễn viên
+               
+         div(style="float:left")  
+         
   .clear
   block footer
   .copy-right

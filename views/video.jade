@@ -39,26 +39,9 @@ block content
 
         .clear
       .row
-       
        .content-grids
+        .content-grid(style="width:227px")
         
-         - for(var i in listFilm){
-           .content-grid(style="width:227px")
-            a(href="#{global.site_path}video/view?id=#{ listFilm[i]['_id']}") 
-             img(src="#{listFilm[i]['image']}",style="width:227px;height:227px")
-            h3(style="margin:0 0 0 0") #{ listFilm[i]['name'].toUpperCase()}
-            ul
-             li 
-              a(href="#")
-               img(src="images/likes.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-             li 
-              a(href="#")
-               img(src="images/views.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-             li 
-              a(href="#")
-               img(src="images/link.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-            a(href="none",class="button") Xem ngay
-         -  }
 
   .clear
   block footer

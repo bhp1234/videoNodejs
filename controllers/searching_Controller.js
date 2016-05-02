@@ -7,8 +7,8 @@ method.show=function (req, res, next) {
 method.privateModel.getFilmsByKey(req.body.value,function(errF,lFilm){
 method.privateModel.getActorsByKey(req.body.value,function(errA,lActor){ 
 var data="";
-	if(errF!=null)
-	data+= '<li><h4>Sản phẩm</h4></li>';
+
+	if(errF==null)
 	for(var i in lFilm)
 	{
 		data+= lFilm[i]["_id"]+SPLIT_MEMBER+lFilm[i]["image"]+SPLIT_MEMBER+lFilm[i]["name"];
@@ -16,7 +16,8 @@ var data="";
 		data+= SPLIT_ROW;
 	}
 	
-	if(errA!=0)
+	if(errA==null)
+	{
 	data+=NEW_LINE;
 	for(var i in lActor)
 	{
@@ -24,6 +25,7 @@ var data="";
 		data+= lActor[i]["_id"]+SPLIT_MEMBER+lActor[i]["name"];
 		if(i!=lActor.length-1)
 		data+=SPLIT_ROW;
+	}
 	}
  res.send(data); 
  });

@@ -12,5 +12,48 @@ html
     style.
      a:hover,a:focus,a:active,a:visited{text-decoration:none;}
   body
-    block content
-    block footer
+  <div class="header">
+  <div class="wrap">
+  <div class="logo">
+  <a href="#{global.site_path}index"><img src="#{ global.site_path }images/logo.png" title="logo" /></a>
+  </div>
+
+  <div class="top-menu">
+  <div class="top-nav">
+  <ul>
+  <li><a href="#">Blog</a></li>
+  <li><a href="#">Videos</a></li>
+  <li><a href="categories.html">Categories</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  </ul>
+  </div>
+  <div class="search" id="search" style="width:350px">
+
+
+  <div class="input-group">
+  
+  <input type="text" style="width:300px" id="searchBox" class="form-control" placeholder="Search for...">
+  <span class="input-group-btn">
+  <button class="btn btn-default" type="button" style="background:url(#{global.site_path}images/search-icon.png) no-repeat 46% 46% #464141;width:48px;height:34px"></button>
+  </span>
+  
+  </div><!-- /input-group -->
+  <div class="row" id="search_div" style="position:absolute;overflow:hidden;z-index: 100;background:#ffffff;width:300px;border-collapse: collapse;margin-left:0px" >
+  <ul id="search_result">
+  </ul>
+  </div>
+  </div><!-- /.col-lg-6 -->
+
+ 
+
+
+  <div class="clear"> </div>
+  </div>
+  <div class="clear"> </div>
+
+  </div>
+
+  </div>
+  <div class="clear"> </div>
+  block content
+  block footer
