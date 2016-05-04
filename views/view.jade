@@ -1,5 +1,6 @@
 extends header
-
+block title
+ title View
 block content
   
   .main-content(style="padding-bottom: 0px;")
@@ -43,31 +44,57 @@ block content
             
        div(style="width:90%;margin:5%")
         .inner-page 
-         .title
+         .title 
            h2 #{film['name']} ( #{film['english_name']} )
          .video-inner 
          -if(film['listEp'][0]!=null)
-          iframe(src="#{film['listEp'][0]['link']}",width="100%",height="500px",frameborder="0",webkitallowfullscree,mozallowfullscreen allowfullscreen)
+          iframe(src="#{film['listEp'][Episo-1]['link']}",width="100%",height="500px",frameborder="0",webkitallowfullscree,mozallowfullscreen allowfullscreen)
          -else
-          h2 VIDEO DANG CẬP NHẬT
+          h2 VIDEO ĐANG CẬP NHẬT
         .video-detail
          .left-sidebar
           .sidebar-boxs
            .clear
             .type-videos
-              h2 Giới Thiệu
+              -if(film['listEp'].length>1){
+              h4 TẬP PHIM( #{Episo}/#{film['listEp'].length})
               ul
+               -for(var i in film['listEp']){
+               li
+               -if(i!=(Episo-1))
+                a(href="view?id=#{film['_id']}&Ep=#{film['listEp'][i]['ep']}",style="float:left;padding:10px 15px 10px 15px;margin-right:5px") #{film['listEp'][i]['ep']}
+               -else
+                a(href="view?id=#{film['_id']}&Ep=#{film['listEp'][i]['ep']}",style="float:left;padding:10px 15px 10px 15px;margin-right:5px;background-color:green;color:white") #{film['listEp'][i]['ep']}
+               -}
+              -}
+              .clear
+              h4 THÔNG TIN
+              ul(style="list-style:circle")
                li Tên phim: #{film['name']}
                li Tên tiếng Anh: #{film['english_name']}
                li Năm sản xuất: #{film['year_of_production']}
-               li Thể loại film:
+               -var text="";
+               -for(var i in film['Type']){  
+                    -text+=film['Type'][i]['type_name']+ ' '
+               -}
+               li Thể loại : #{text}
+               li Thời lượng:#{film['time']}   
+                  
                li Quốc gia: #{film['name']}
-               li Thời lượng: #{film['directory']}
+               li Đạo diễn: #{film['directory']}
                li IMDb: #{film['imdb']}
                li Nội dung: #{film['detail']}
               ul
                li Từ khóa: #{film['keyword']}
-              h2 Diễn viên
+              h4 DIỄN VIÊN
+              div(style="height:200px;overflow:overlay")
+               ul
+                -for(var i in film['Actor']){  
+                   li(style="height:61px")
+                    a(href="#",style="width:60px;height:60px;float:left")
+                     img(src="#{film['Actor'][i]['avatar']}")
+                    a(href="#",style="padding:15px") &nbsp; #{film['Actor'][i]['name']}
+                -}
                
          div(style="float:left")  
          

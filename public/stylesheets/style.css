@@ -177,7 +177,7 @@ img{max-width:100%;}
 	display:block;
 }
 .type-videos ul li a:before{
-	content: url(../images/marker2.png);
+
 	padding: 0px 8px 0px 5px;
 	vertical-align: sub;
 }
@@ -186,7 +186,7 @@ img{max-width:100%;}
 	font-family: 'gandhi_sansregular';
 	font-size: 0.875em;
 	line-height: 1.5em;
-	padding: 18px 10px 11px 10px;
+
 	display: block;
 	background: #F1F0F6;
 	margin: 1px 0;
@@ -917,7 +917,7 @@ z-index:2000;
 top:185px;
 left:20px;
 border-top:3px solid red;
-height:170px;
+height:210px;
 width:90%;
 margin-top:30px;
 display:none;
