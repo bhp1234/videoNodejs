@@ -17,7 +17,7 @@ method.MongoClient.connect(global.url, function (err, db) {
 						{$match:{'_id':new method.ObjectID(key)}},
 						{$lookup:{from:'Episode',localField:'_id',foreignField:'filmID',as:'listEp'}},
 						{$lookup:{from:'Type_of_Film',localField:'_id',foreignField:'filmID',as:'listType'}},
-						{$lookup:{from:'Actors_of_Film',localField:'_id',foreignField:'filmID',as:'listActor'}}],(function (err, result) {
+						{$lookup:{from:'Actors_of_Film',localField:'_id',foreignField:'filmID',as:'listActor'}},{$limit:20}],(function (err, result) {
       if (err) {
    
 		callback('Lỗi truy vấn',null);

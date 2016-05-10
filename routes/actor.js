@@ -6,7 +6,7 @@ function setController(crl)
  controller=crl;
 }
 /* GET home page. */
-router.get('/ActorDetail', function(req, res, next) {
+router.get('/detail', function(req, res, next) {
  controller.showView(req, res, next);
 });
 

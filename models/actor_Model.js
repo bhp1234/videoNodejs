@@ -2,7 +2,7 @@ var Model=require('../core/Model');
 function actor_Model(){}
 var method=actor_Model.prototype;
 
-method.getActorByID=function(key,callback){ 
+method.getActorByID=function(key,page,callback){ 
 
 method.MongoClient.connect(global.url, function (err, db) {
   if (err) {
@@ -15,7 +15,7 @@ method.MongoClient.connect(global.url, function (err, db) {
   
 	collection.aggregate([
 						{$match:{'_id':new method.ObjectID(key)}},
-						{$lookup:{from:'Actors_of_Film',localField:'_id',foreignField:'filmID',as:'listActor'}}],(function (err, result) {
+						{$lookup:{from:'Actors_of_Film',localField:'_id',foreignField:'actorID',as:'listActor'}}],(function (err, result) {
       if (err) {
    
 		callback('Lỗi truy vấn',null);
@@ -30,10 +30,12 @@ method.MongoClient.connect(global.url, function (err, db) {
 		   }
 			var collection2=db.collection("Films");
 			collection2.find({_id:{$in:query}}).toArray(function(err2,result2){
-				result[0]['Film']=result2;
-				console.log(result);
-				callback(null,result);
-				
+			    var collection3=db.collection("Films");
+				collection3.find({_id:{$in:query}}).skip(page*global.PAGE_SIZE).limit(global.PAGE_SIZE).toArray(function(err3,result3){
+					result[0]['Film']=result3;
+					console.log(result);
+					callback(null,result,result2.length);
+				});	
 			});	
 	  
 		

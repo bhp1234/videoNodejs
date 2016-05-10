@@ -9,7 +9,7 @@ block content
      .right-content
       .right-content-heading
        .right-content-heading-left
-         ul.categories
+         ul.categories(style="font-family:Arial")
           - for( var i in listCategory){ 
              li(id="#{listCategory[i]['_id']}",style="float:left",onmouseover="showCategory('#{listCategory[i]['_id']}')",onmouseout="hideCategory('#{listCategory[i]['_id']}')")
                a(href="#")
@@ -41,26 +41,38 @@ block content
         .clear
       .row
        
-       .content-grids
-        
-         - for(var i in listFilm){
-           .content-grid(style="width:227px")
-            a(href="#{global.site_path}video/view?id=#{ listFilm[i]['_id']}") 
-             img(src="#{listFilm[i]['image']}",style="width:227px;height:227px")
-            h3(style="margin:0 0 0 0") #{ listFilm[i]['name'].toUpperCase()}
-            ul
-             li 
-              a(href="#")
-               img(src="images/likes.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-             li 
-              a(href="#")
-               img(src="images/views.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-             li 
-              a(href="#")
-               img(src="images/link.png",title="#{ listFilm[i]['name']} - #{global.dns}")
-            a(href="none",class="button") Xem ngay
-         -  }
-
+       
+      .row
+       div(class="carousel slide multi-item-carousel",id="theCarousel")
+         .carousel-inner
+            - for(var i=0;i<listFilm.length;i++){var myClass="item";
+                   -if(i==0) myClass+=" active";
+                     div(class="#{myClass}")
+                       .content-grid(style="width:227px")
+                          a(href="#{global.site_path}video/view?id=#{ listFilm[i]['_id']}") 
+                            img(src="#{listFilm[i]['image']}",style="width:227px;height:227px")
+                          h3(style="margin:0 0 0 0") #{ listFilm[i]['name'].toUpperCase()}
+                          ul
+                            li 
+                             a(href="#")
+                              img(src="images/likes.png",title="#{ listFilm[i]['name']} - #{global.dns}")
+                            li 
+                             a(href="#")
+                              img(src="images/views.png",title="#{ listFilm[i]['name']} - #{global.dns}")
+                            li 
+                             a(href="#")
+                              img(src="images/link.png",title="#{ listFilm[i]['name']} - #{global.dns}")
+                          a(href="#{global.site_path}video/view?id=#{ listFilm[i]['_id']}",class="button") Xem ngay
+                      
+                 
+            -  }
+          
+          
+    
+         a(class="left carousel-control",href="#theCarousel",data-slide="prev")
+          i(class="glyphicon glyphicon-chevron-left")
+         a(class="right carousel-control",href="#theCarousel",data-slide="next")
+          i(class="glyphicon glyphicon-chevron-right")
   .clear
   block footer
   .copy-right

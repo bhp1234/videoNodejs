@@ -5,44 +5,10 @@ block content
   
   .main-content(style="padding-bottom: 0px;")
 
-
-     .right-content
-      .right-content-heading
-       .right-content-heading-left
-         ul.categories
-          - for( var i in listCategory){ 
-             li(id="#{listCategory[i]['_id']}",style="float:left",onmouseover="showCategory('#{listCategory[i]['_id']}')",onmouseout="hideCategory('#{listCategory[i]['_id']}')")
-               a(href="#")
-                span
-                 i(class="#{listCategory[i]['icon']}",style="margin-left:20%") 
-                |#{listCategory[i]['name'].toUpperCase()}
-               div(id="cate#{listCategory[i]['_id']}",class="category-detail")
-                ul(style="margin-left:35px")
-                  -var j=0;
-                  -while(j<listFilmType[listCategory[i]['_id']].length){
-                     ul(style="float:left")
-                       
-                       - for(var k=0;k<global.numDisplayCate && j< listFilmType[listCategory[i]['_id']].length;k++,j++){ 
-                            li #{listFilmType[listCategory[i]['_id']][j]['type_name']}
-                       - }
-                  -}   
-               
-          - }
-       .right-content-heading-right
-        .social-icons
-         ul
-              li <a class="facebook" href="#" target="_blank"> </a>
-              li <a class="twitter" href="#" target="_blank"></a>
-              li <a class="googleplus" href="#" target="_blank"></a>
-              li <a class="pinterest" href="#" target="_blank"></a>
-              li <a class="dribbble" href="#" target="_blank"></a>
-              li <a class="vimeo" href="#" target="_blank"></a>
-
-        .clear
       .row
        
             
-       div(style="width:90%;margin:5%")
+       div(style="width:90%;margin:3%")
         .inner-page 
          .title 
            h2 #{film['name']} ( #{film['english_name']} )
@@ -91,9 +57,9 @@ block content
                ul
                 -for(var i in film['Actor']){  
                    li(style="height:61px")
-                    a(href="#",style="width:60px;height:60px;float:left")
+                    a(href="#{global.site_path}actor/detail?id=#{film['Actor'][i]['_id']}",style="width:60px;height:60px;float:left")
                      img(src="#{film['Actor'][i]['avatar']}")
-                    a(href="#",style="padding:15px") &nbsp; #{film['Actor'][i]['name']}
+                    a(href="#{global.site_path}actor/detail?id=#{film['Actor'][i]['_id']}",style="padding:15px") &nbsp; #{film['Actor'][i]['name']}
                 -}
                
          div(style="float:left")  

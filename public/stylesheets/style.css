@@ -923,3 +923,54 @@ margin-top:30px;
 display:none;
 background-color:white
 }
+
+.multi-item-carousel{
+  .carousel-inner{
+    > .item{
+      transition: 500ms ease-in-out left;
+    }
+    .active{
+      &.left{
+        left:-33%;
+      }
+      &.right{
+        left:33%;
+      }
+    }
+    .next{
+      left: 33%;
+    }
+    .prev{
+      left: -33%;
+    }
+    @media all and (transform-3d), (-webkit-transform-3d) {
+      > .item{
+        // use your favourite prefixer here
+        transition: 500ms ease-in-out all;
+        backface-visibility: visible;
+        transform: none!important;
+      }
+    }
+  }
+  .carouse-control{
+    &.left, &.right{
+      background-image: none;
+    }
+  }
+}
+
+#pageSheet li{
+	float:left;
+	margin-right:10px;
+	border:1px solid white;
+	padding:5px 10px 0px 10px;
+	border-radius:2px;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+	display: inline-block;
+	height: 28px;
+	font-weight:500;
+}
+
+#pageSheet li:hover{
+	background-color:#EC9B06;
+}
